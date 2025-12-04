@@ -2,5 +2,5 @@
   <Configurations>
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="ServiceMonitor_QtBoost/ServiceMonitor_QtBoost.vcxproj" />
+  <Project Path="ServiceMonitor_QtBoost/ServiceMonitor_QtBoost.vcxproj" Id="1957d7f2-efe1-4375-a7e5-847d0d1024c8" />
 </Solution>
