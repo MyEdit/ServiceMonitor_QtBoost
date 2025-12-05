@@ -1,19 +1,21 @@
 #pragma once
 
-#include <QObject.h>
+#include <Qtclasshelpermacros>
+#include <QScopedPointer>
+#include <QVector>
 
-class ServiceConfig : public QObject
+class ServiceConfig
 {
-	Q_OBJECT
 	Q_DISABLE_COPY(ServiceConfig)
 
 public:
 	static ServiceConfig* instance();
-	~ServiceConfig() override = default;
+	~ServiceConfig() = default;
 
 private:
-	explicit ServiceConfig(QObject* parent = nullptr);
+	explicit ServiceConfig();
 
 	inline static QScopedPointer<ServiceConfig> m_instance;
+	inline static QVector<int> services;
 };
 
