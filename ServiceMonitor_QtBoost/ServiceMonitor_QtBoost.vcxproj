@@ -67,6 +67,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\LIBS\boost_1_89_0;..\..\LIBS\Json-Nlohman-3.12.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>
@@ -78,6 +79,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\LIBS\boost_1_89_0;..\..\LIBS\Json-Nlohman-3.12.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>

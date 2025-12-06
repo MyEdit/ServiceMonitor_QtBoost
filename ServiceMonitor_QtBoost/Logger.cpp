@@ -49,8 +49,6 @@ void Logger::printLog(const std::string_view& message, LogLevel logLevel) const
         case boostLogger::trivial::fatal:    levelStr = "Fatal";    break;
         default:                             levelStr = "Unknown";  break;
     }
-
-    std::string testString = "пРИВЕТ МИР";
     
     QString formatted = QString("%1 [%2]: %3")
         .arg(timestamp)

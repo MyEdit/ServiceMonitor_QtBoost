@@ -27,7 +27,8 @@ namespace boostExpression = boost::log::expressions;
 
 using LogLevel = boost::log::trivial::severity_level;
 
-// Чутка переопределим под наши цели 
+// Чутка переопределим под наши цели
+#undef BOOST_LOG_TRIVIAL
 #define BOOST_LOG_TRIVIAL(lvl)\
     BOOST_LOG_STREAM_WITH_PARAMS(::boost::log::trivial::logger::get(),\
         (::boost::log::keywords::severity = lvl))
