@@ -24,10 +24,10 @@ Logger::Logger()
     boostLogger::core::get()->set_filter(boostLogger::trivial::severity >= boostLogger::trivial::info);
 }
 
-Logger& Logger::instance()
+Logger* Logger::instance()
 {
     static Logger instance;
-    return instance;
+    return &instance;
 }
 
 void Logger::printLog(const std::string_view& message, LogLevel logLevel) const

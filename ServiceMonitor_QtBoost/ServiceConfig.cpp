@@ -1,16 +1,12 @@
-#include "ServiceConfig.h"
+﻿#include "ServiceConfig.h"
 
-ServiceConfig::ServiceConfig()
+ServiceConfig::ServiceConfig(/*TODO: Путь до конфига*/)
 {
 
 }
 
 ServiceConfig* ServiceConfig::instance()
 {
-    if (m_instance.isNull())
-    {
-        m_instance.reset(new ServiceConfig());
-    }
-
-    return m_instance.data();
+    static ServiceConfig instance;
+    return &instance;
 }

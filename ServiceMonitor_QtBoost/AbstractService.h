@@ -5,9 +5,7 @@
 
 #include <json.hpp>
 
-#include "Logger.h"
-
-class IService
+class AbstractService
 {
 	enum class ServiceType
 	{
@@ -18,10 +16,12 @@ class IService
 	};
 
 public:
-	IService(const nlohmann::json& json);
-	virtual ~IService() = default;
+	AbstractService(const nlohmann::json& json);
+	virtual ~AbstractService() = default;
 
-	virtual bool isValid() const;
+	QStringView getName() const;
+	QStringView getHost() const;
+	ServiceType getServiceType() const;
 
 private:
 	static const constexpr auto EMPTY_STRING = "";
@@ -29,6 +29,6 @@ private:
 	QString host;
 	ServiceType type;
 
+	virtual std::pair<bool, QString> isValid() const;
 	ServiceType stringToServiceType(const QString& str);
 };
-

@@ -38,7 +38,7 @@ class Logger
 	Q_DISABLE_COPY(Logger)
 
 public:
-	static Logger& instance(); // Юзаем Мейер-синглтон
+	static Logger* instance(); // Юзаем Мейер-синглтон
 	~Logger() = default;
 
 	void printLog(const std::string_view& message, LogLevel logLevel) const;
