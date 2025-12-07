@@ -3,10 +3,12 @@
 #include <string>
 
 #include <Qtclasshelpermacros>
+#include <QCoreApplication>
 #include <QScopedPointer>
 #include <QString>
 #include <QDateTime>
 #include <QMutex>
+#include <QDir>
 
 #include <boost/log/core.hpp>
 #include <boost/log/expressions.hpp>

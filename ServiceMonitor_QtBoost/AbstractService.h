@@ -5,30 +5,27 @@
 
 #include <json.hpp>
 
+#include "ServiceMonitorException.h"
+
 class AbstractService
 {
-	enum class ServiceType
-	{
-		HTTP,
-		TCP,
-		PING,
-		UNKNOWN,
-	};
-
 public:
 	AbstractService(const nlohmann::json& json);
 	virtual ~AbstractService() = default;
 
-	QStringView getName() const;
-	QStringView getHost() const;
-	ServiceType getServiceType() const;
+	virtual QStringView getName() const;
+	virtual QStringView getHost() const;
+	virtual QStringView getServiceType() const;
 
-private:
+protected:
 	static const constexpr auto EMPTY_STRING = "";
+	static const constexpr auto EMPTY_INT = -1;
 	QString name;
 	QString host;
-	ServiceType type;
+	QString type;
 
 	virtual std::pair<bool, QString> isValid() const;
-	ServiceType stringToServiceType(const QString& str);
+
+private:
+	std::pair<bool, QString> isValidBase() const;
 };

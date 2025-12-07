@@ -10,14 +10,18 @@ Logger::Logger()
             << boostExpression::smessage
         );
 
+    std::string logsDir = QDir(QCoreApplication::applicationDirPath()).filePath("Logs").toStdString();
+
     boostLogger::add_common_attributes();
     boostLogger::register_simple_formatter_factory<LogLevel, char>("Severity");
     boostLogger::add_file_log
         (
-            boostKeywords::target = "logs/", boostKeywords::file_name = "%d-%m-%y-%3N.log",
+            boostKeywords::target = logsDir + "/",
+            boostKeywords::file_name = logsDir + "/%d-%m-%y-%3N.log",
             boostKeywords::rotation_size = 10 * 1024 * 1024,
             boostKeywords::scan_method = boostSinks::file::scan_matching,
-            boostKeywords::format = logFormat
+            boostKeywords::format = logFormat,
+            boostKeywords::auto_flush = true
         );
 
     boostLogger::add_console_log(std::cout, boostKeywords::format = logFormat);

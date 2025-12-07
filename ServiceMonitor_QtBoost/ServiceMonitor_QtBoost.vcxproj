@@ -119,17 +119,23 @@
     <QtRcc Include="ServiceMonitor_QtBoost.qrc" />
     <QtUic Include="ServiceMonitor_QtBoost.ui" />
     <QtMoc Include="ServiceMonitor_QtBoost.h" />
-    <ClCompile Include="IService.cpp" />
+    <ClCompile Include="AbstractService.cpp" />
+    <ClCompile Include="HttpService.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="ServiceConfig.cpp" />
+    <ClCompile Include="ServiceFactory.cpp" />
+    <ClCompile Include="ServiceMonitorException.cpp" />
     <ClCompile Include="ServiceMonitor_QtBoost.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HttpService.h" />
     <ClInclude Include="ServiceConfig.h" />
+    <ClInclude Include="ServiceFactory.h" />
+    <ClInclude Include="ServiceMonitorException.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IService.h" />
+    <ClInclude Include="AbstractService.h" />
     <ClInclude Include="Logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

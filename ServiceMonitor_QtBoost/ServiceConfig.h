@@ -1,24 +1,30 @@
 ﻿#pragma once
 
+#include <fstream>
+
 #include <Qtclasshelpermacros>
 #include <QSharedPointer>
 #include <QVector>
 
-#include "AbstractService.h"
 #include "Logger.h"
+#include "AbstractService.h"
+#include "ServiceMonitorException.h"
+#include "ServiceFactory.h"
+#include "HttpService.h"
 
 class ServiceConfig
 {
 	Q_DISABLE_COPY(ServiceConfig)
 
 public:
-	static ServiceConfig* instance(); // Юзаем Мейер-синглтон
-	~ServiceConfig() = default;
+    explicit ServiceConfig(const QString& pathToConfig);
+	virtual ~ServiceConfig() = default;
 
 private:
-	explicit ServiceConfig(/*TODO: Путь до конфига*/);
+    void parse();
 
-	inline static QVector<QSharedPointer<AbstractService>> services;
+	QVector<QSharedPointer<AbstractService>> services;
+    QString pathToConfig;
 };
 
 // Примерный Config.json
