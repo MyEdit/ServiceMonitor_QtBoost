@@ -6,7 +6,7 @@ AbstractService::AbstractService(const nlohmann::json& json)
 	this->host = QString::fromStdString(json.value("host", EMPTY_STRING));
 	this->type = QString::fromStdString(json.value("type", EMPTY_STRING));
 
-    if (auto [ok, message] = this->isValid(); !ok)
+    if (auto [ok, message] = this->isValidBase(); !ok)
     {
         throw ServiceMonitorException(message.toStdString());
     }

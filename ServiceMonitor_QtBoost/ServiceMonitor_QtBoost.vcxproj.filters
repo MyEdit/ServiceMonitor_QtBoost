@@ -58,6 +58,9 @@
     <ClCompile Include="HttpService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="JsonConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractService.h">
@@ -76,6 +79,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HttpService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

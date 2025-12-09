@@ -8,14 +8,14 @@ public:
 	HttpService(const nlohmann::json& json);
 	virtual ~HttpService() = default;
 
-	quint32 getPort() const;
+	int getPort() const;
+	int getExpectedStatus() const;
 	QStringView getPath() const;
-	quint32 getExpectedStatus() const;
 
 protected:
-	quint32 port;
+	int port;
+	int expectedStatus;
 	QString path;
-	quint32 expectedStatus;
 
 	virtual std::pair<bool, QString> isValid() const override;
 };

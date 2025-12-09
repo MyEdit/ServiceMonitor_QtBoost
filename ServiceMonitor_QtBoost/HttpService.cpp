@@ -6,6 +6,11 @@ HttpService::HttpService(const nlohmann::json& json)
 	this->port = json.value("port", EMPTY_INT);
 	this->path = QString::fromStdString(json.value("path", EMPTY_STRING));
 	this->expectedStatus = json.value("expected_status", EMPTY_INT);
+
+	if (auto [ok, message] = this->isValid(); !ok)
+	{
+		throw ServiceMonitorException(message.toStdString());
+	}
 }
 
 std::pair<bool, QString> HttpService::isValid() const
@@ -28,17 +33,17 @@ std::pair<bool, QString> HttpService::isValid() const
 	return { true, EMPTY_STRING };
 }
 
-quint32 HttpService::getPort() const
+int HttpService::getPort() const
 {
 	return this->port;
+}
+
+int HttpService::getExpectedStatus() const
+{
+	return this->expectedStatus;
 }
 
 QStringView HttpService::getPath() const
 {
 	return this->path;
-}
-
-quint32 HttpService::getExpectedStatus() const
-{
-	return this->expectedStatus;
 }

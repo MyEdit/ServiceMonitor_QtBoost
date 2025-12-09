@@ -121,6 +121,7 @@
     <QtMoc Include="ServiceMonitor_QtBoost.h" />
     <ClCompile Include="AbstractService.cpp" />
     <ClCompile Include="HttpService.cpp" />
+    <ClCompile Include="JsonConfig.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="ServiceConfig.cpp" />
     <ClCompile Include="ServiceFactory.cpp" />
@@ -130,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HttpService.h" />
+    <ClInclude Include="IConfig.h" />
+    <ClInclude Include="JsonConfig.h" />
     <ClInclude Include="ServiceConfig.h" />
     <ClInclude Include="ServiceFactory.h" />
     <ClInclude Include="ServiceMonitorException.h" />

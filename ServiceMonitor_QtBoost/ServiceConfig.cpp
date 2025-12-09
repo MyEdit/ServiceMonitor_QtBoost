@@ -1,8 +1,9 @@
 ﻿#include "ServiceConfig.h"
 
 ServiceConfig::ServiceConfig(const QString& pathToConfig)
+    : JsonConfig(pathToConfig)
 {
-    this->pathToConfig = pathToConfig;
+    JsonConfig::loadConfig();
     this->parse();
 }
 
@@ -16,6 +17,7 @@ void ServiceConfig::parse()
     }
 
     nlohmann::json jsonConfig = nlohmann::json::parse(fileStream);
+    fileStream.close();
 
     if (!jsonConfig.contains("services") || !jsonConfig["services"].is_array())
     {
@@ -40,11 +42,49 @@ void ServiceConfig::parse()
                 Logger::instance()->info(httpService->getPath().toString().toStdString());
                 Logger::instance()->info(QString::number(httpService->getExpectedStatus()).toStdString());
 			}
-
         }
         catch (const std::exception& e)
         {
             continue;
         }
     }
+}
+
+nlohmann::json ServiceConfig::getDefaultJson() const
+{
+    nlohmann::json json;
+
+    json["services"] =
+    {
+        {
+            {"name", "Google HTTP"},
+            {"type", "http"},
+            {"host", "google.com"},
+            {"port", 80},
+            {"path", "/"},
+            {"expected_status", 200},
+        },
+        {
+            {"name", "Local SSH"},
+            {"type", "tcp"},
+            {"host", "localhost"},
+            {"port", 80},
+        },
+        {
+            {"name", "Cloudflare DNS"},
+            {"type", "ping"},
+            {"host", "1.1.1.1"},
+            {"timeout_ms", 2000},
+        },
+        {
+            {"name", "Custom API"},
+            {"type", "http"},
+            {"host", "api.example.com"},
+            {"port", 443},
+            {"path", "/health"},
+            {"expected_status", 200},
+        },
+    };
+
+    return json;
 }
