@@ -21,6 +21,42 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Source Files\Config">
+      <UniqueIdentifier>{d1484bd2-7018-4906-bc70-5346ddc77b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Config">
+      <UniqueIdentifier>{40e46eaf-74a5-429b-a3b7-f86e3a172603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{48d5453d-53fc-495c-919e-2fed91b5eeb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{2b367194-0ebe-497d-a165-01ad347abcb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services\Factory">
+      <UniqueIdentifier>{6afc480b-a5c6-4c79-adc4-3d3aa7afe47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services\Factory">
+      <UniqueIdentifier>{65523414-6dcd-41e5-a3d5-56812b59d902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO">
+      <UniqueIdentifier>{86ce4607-4cae-4234-8a08-933d490859ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{a2b983b2-253a-4633-9688-aa2f1ea5e478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{02bb37ea-f75c-4a2f-96f7-3004308ea55d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{f1136505-76cf-49a2-80fe-b163708553ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{eea669bb-af31-4a2f-bf18-bbdccfbbc0e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{6a34a8c6-7026-42bd-93d1-c583ef161cd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ServiceMonitor_QtBoost.qrc">
@@ -29,63 +65,65 @@
     <QtUic Include="ServiceMonitor_QtBoost.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="ServiceMonitor_QtBoost.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="ServiceMonitor_QtBoost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="JsonConfig.cpp">
+      <Filter>Source Files\Config</Filter>
+    </ClCompile>
     <ClCompile Include="ServiceConfig.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Config</Filter>
     </ClCompile>
     <ClCompile Include="AbstractService.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceMonitorException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
     <ClCompile Include="HttpService.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="JsonConfig.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ServiceFactory.cpp">
+      <Filter>Source Files\Services\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceMonitorException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceMonitor_QtBoost.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceConfig.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceMonitorException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ServiceFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IConfig.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Config</Filter>
     </ClInclude>
     <ClInclude Include="JsonConfig.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Config</Filter>
     </ClInclude>
+    <ClInclude Include="ServiceConfig.h">
+      <Filter>Header Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractService.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpService.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceFactory.h">
+      <Filter>Header Files\Services\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceMonitorException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ServiceMonitor_QtBoost.h">
+      <Filter>Header Files\UI</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
