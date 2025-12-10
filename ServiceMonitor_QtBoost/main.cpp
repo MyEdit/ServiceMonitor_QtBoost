@@ -4,7 +4,6 @@
 
 #include "ServiceConfig.h"
 #include "ServiceFactory.h"
-#include "HttpService.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +12,12 @@ int main(int argc, char *argv[])
 	// Регистрация типов сервисов
     ServiceFactory::instance()->registerService("http",
         [](const nlohmann::json& json) { return QSharedPointer<HttpService>::create(json); });
+
+    ServiceFactory::instance()->registerService("tcp",
+        [](const nlohmann::json& json) { return QSharedPointer<TcpService>::create(json); });
+
+    ServiceFactory::instance()->registerService("ping",
+        [](const nlohmann::json& json) { return QSharedPointer<PingService>::create(json); });
 
     ServiceConfig* serviceConfig = new ServiceConfig(QDir(QCoreApplication::applicationDirPath()).filePath("Configs/Config.json"));
 

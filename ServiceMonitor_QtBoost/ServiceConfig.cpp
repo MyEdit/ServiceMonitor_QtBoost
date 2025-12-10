@@ -25,6 +25,7 @@ void ServiceConfig::parse()
     }
 
     services.clear();
+    Logger::instance()->info("======================");
 
     for (const auto& serviceJson : jsonConfig["services"])
     {
@@ -42,6 +43,16 @@ void ServiceConfig::parse()
                 Logger::instance()->info(httpService->getPath().toString().toStdString());
                 Logger::instance()->info(QString::number(httpService->getExpectedStatus()).toStdString());
 			}
+            else if (TcpService* tcpService = dynamic_cast<TcpService*>(service.get()))
+            {
+                Logger::instance()->info(QString::number(tcpService->getPort()).toStdString());
+            }
+            else if (PingService* pingService = dynamic_cast<PingService*>(service.get()))
+            {
+                Logger::instance()->info(QString::number(pingService->getTimeout()).toStdString());
+            }
+
+            Logger::instance()->info("======================");
         }
         catch (const std::exception& e)
         {

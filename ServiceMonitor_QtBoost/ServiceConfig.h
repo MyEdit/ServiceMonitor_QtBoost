@@ -5,10 +5,11 @@
 #include <QVector>
 
 #include "JsonConfig.h"
-#include "AbstractService.h"
 #include "ServiceMonitorException.h"
 #include "ServiceFactory.h"
 #include "HttpService.h"
+#include "TcpService.h"
+#include "PingService.h"
 
 class ServiceConfig : public JsonConfig
 {

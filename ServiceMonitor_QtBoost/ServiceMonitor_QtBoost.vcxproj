@@ -116,6 +116,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PingService.cpp" />
+    <ClCompile Include="TcpService.cpp" />
     <QtRcc Include="ServiceMonitor_QtBoost.qrc" />
     <QtUic Include="ServiceMonitor_QtBoost.ui" />
     <QtMoc Include="ServiceMonitor_QtBoost.h" />
@@ -133,9 +135,11 @@
     <ClInclude Include="HttpService.h" />
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="JsonConfig.h" />
+    <ClInclude Include="PingService.h" />
     <ClInclude Include="ServiceConfig.h" />
     <ClInclude Include="ServiceFactory.h" />
     <ClInclude Include="ServiceMonitorException.h" />
+    <ClInclude Include="TcpService.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractService.h" />
