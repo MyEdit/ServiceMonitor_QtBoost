@@ -100,6 +100,9 @@
     <ClCompile Include="PingService.cpp">
       <Filter>Source Files\Services</Filter>
     </ClCompile>
+    <ClCompile Include="TCPChecker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IConfig.h">
@@ -131,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="PingService.h">
       <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPChecker.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

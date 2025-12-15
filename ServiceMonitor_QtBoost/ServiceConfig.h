@@ -19,6 +19,8 @@ public:
     explicit ServiceConfig(const QString& pathToConfig);
 	virtual ~ServiceConfig() = default;
 
+	QVector<QSharedPointer<AbstractService>> getServises() const;
+
 private:
 	QVector<QSharedPointer<AbstractService>> services;
 

@@ -24,7 +24,7 @@ void ServiceConfig::parse()
         throw ServiceMonitorException("Неправильная конфигурация: отсутствует массив 'services'");
     }
 
-    services.clear();
+    this->services.clear();
     Logger::instance()->info("======================");
 
     for (const auto& serviceJson : jsonConfig["services"])
@@ -32,6 +32,7 @@ void ServiceConfig::parse()
         try
         {
             QSharedPointer<AbstractService> service = ServiceFactory::instance()->create(serviceJson);
+            this->services.push_back(service);
 
             Logger::instance()->info(service->getName().toString().toStdString());
             Logger::instance()->info(service->getHost().toString().toStdString());
@@ -98,4 +99,9 @@ nlohmann::json ServiceConfig::getDefaultJson() const
     };
 
     return json;
+}
+
+QVector<QSharedPointer<AbstractService>> ServiceConfig::getServises() const
+{
+    return this->services;
 }

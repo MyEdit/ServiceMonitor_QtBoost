@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="PingService.cpp" />
+    <ClCompile Include="TCPChecker.cpp" />
     <ClCompile Include="TcpService.cpp" />
     <QtRcc Include="ServiceMonitor_QtBoost.qrc" />
     <QtUic Include="ServiceMonitor_QtBoost.ui" />
@@ -139,6 +140,7 @@
     <ClInclude Include="ServiceConfig.h" />
     <ClInclude Include="ServiceFactory.h" />
     <ClInclude Include="ServiceMonitorException.h" />
+    <ClInclude Include="TCPChecker.h" />
     <ClInclude Include="TcpService.h" />
   </ItemGroup>
   <ItemGroup>
