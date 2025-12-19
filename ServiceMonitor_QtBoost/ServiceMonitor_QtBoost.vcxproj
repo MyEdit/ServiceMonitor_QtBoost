@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CheckerFactory.cpp" />
     <ClCompile Include="PingService.cpp" />
     <ClCompile Include="TCPChecker.cpp" />
     <ClCompile Include="TcpService.cpp" />
@@ -133,6 +134,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractChecker.h" />
+    <ClInclude Include="CheckerFactory.h" />
     <ClInclude Include="HttpService.h" />
     <ClInclude Include="IConfig.h" />
     <ClInclude Include="JsonConfig.h" />

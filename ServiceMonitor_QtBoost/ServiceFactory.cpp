@@ -8,7 +8,8 @@ ServiceFactory* ServiceFactory::instance()
 
 void ServiceFactory::registerService(const QString& type, Creator creator)
 {
-    creators[type.toLower()] = creator;
+    Logger::instance()->info(QString("Зарегистрирована фабрика сервиса для типа: %1").arg(type).toStdString());
+    creators[type.trimmed().toLower()] = creator;
 }
 
 QSharedPointer<AbstractService> ServiceFactory::create(const nlohmann::json& json)
@@ -16,7 +17,7 @@ QSharedPointer<AbstractService> ServiceFactory::create(const nlohmann::json& jso
     QString type = QString::fromStdString(json.value("type", "")).trimmed().toLower();
 
     if (!creators.contains(type))
-        throw ServiceMonitorException("Неизвестный тип сервиса: " + type.toStdString());
+        throw ServiceMonitorException("ServiceFactory: Неизвестный тип сервиса: " + type.toStdString());
 
     return creators[type](json);
 }

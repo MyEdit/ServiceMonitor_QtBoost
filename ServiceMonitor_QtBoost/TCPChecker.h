@@ -1,9 +1,5 @@
 ﻿#pragma once
 
-#ifdef _WIN32
-#define _WIN32_WINNT 0x0A00
-#endif
-
 #include <QSharedPointer>
 
 #include <iostream>
@@ -14,6 +10,7 @@
 #include <boost/asio/executor_work_guard.hpp>
 #include <boost/array.hpp>
 
+#include "AbstractChecker.h"
 #include "TcpService.h"
 #include "Logger.h"
 
@@ -21,10 +18,11 @@ namespace asio = boost::asio;
 using tcp = asio::ip::tcp;
 using icmp = asio::ip::icmp;
 
-class TCPChecker
+class TCPChecker : public AbstractChecker
 {
 	struct ServiceConnection
 	{
+		QSharedPointer<TcpService> service;
 		tcp::socket socket;
 		tcp::endpoint endpoint;
 		std::chrono::steady_clock::time_point startTime;
@@ -32,71 +30,24 @@ class TCPChecker
 	};
 
 public:
-	TCPChecker(QVector<QSharedPointer<TcpService>>& services)
-		: ioWorkGuard(asio::make_work_guard(ioContext)) // Сразу кидаем в контекст фейковую работу
-	{
-		ioThread = std::thread([this]()
-			{
-				try
-				{
-					Logger::instance()->info("IO TCP поток запущен");
-					ioContext.run();
-					Logger::instance()->info("IO TCP поток остановлен");
-				}
-				catch (const std::exception& e)
-				{
-					Logger::instance()->error(QString("IO TCP поток выбросил ошибку: %1").arg(e.what()).toStdString());
-				}
-			});
+	TCPChecker();
+	~TCPChecker();
 
-		for (auto& service : services)
-		{
-			// TODO: Наверное стоит в try обернуть, и мб где то проверять адрес числовой (1.1.1.1) или нет (google.com)
-			QSharedPointer<ServiceConnection> serviceConnection = QSharedPointer<ServiceConnection>::create
-				(
-					tcp::socket(ioContext),
-					tcp::endpoint(asio::ip::make_address(service->getHost().toString().toStdString()), service->getPort()),
-					std::chrono::steady_clock::now(),
-					std::chrono::steady_clock::now()
-				);
+	virtual void start() override;
+	virtual void stop() override;
+	virtual void check() override;
 
-			this->services.push_back(serviceConnection);
-		}
-
-		test();
-	}
-
-	void test()
-	{
-		for (auto& serviceConnection : this->services)
-		{
-			serviceConnection->socket.async_connect(serviceConnection->endpoint,
-				[this, &serviceConnection](const boost::system::error_code& ec)
-				{
-					bool success = !ec;
-
-					if (success)
-					{
-						Logger::instance()->debug("Connect");
-					}
-					else
-					{
-						Logger::instance()->debug("Not connect");
-					}
-
-					if (serviceConnection->socket.is_open())
-					{
-						serviceConnection->socket.close();
-					}
-				});
-		}
-	}
+	virtual void addService(const QSharedPointer<AbstractService>& service) override;
+	virtual void removeService(const QString& serviceName) override;
 
 private:
 	boost::system::error_code error;
 	asio::io_context ioContext;
 	asio::executor_work_guard<asio::io_context::executor_type> ioWorkGuard; // fake work
 	std::thread ioThread;
-	QVector<QSharedPointer<ServiceConnection>> services;
+	std::atomic<bool> running{ false };
+	std::atomic<unsigned> intervalMs{ 5000 };
+	std::mutex servicesMutex;
+	QVector<QSharedPointer<ServiceConnection>> serviceConnections;
 };
 

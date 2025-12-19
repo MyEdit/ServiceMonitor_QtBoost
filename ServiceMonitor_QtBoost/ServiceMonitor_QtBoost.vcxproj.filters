@@ -57,6 +57,18 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{6a34a8c6-7026-42bd-93d1-c583ef161cd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Checkers">
+      <UniqueIdentifier>{2b7411e9-68ad-4b05-9b98-0f3d08909c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Checkers\Factory">
+      <UniqueIdentifier>{904605e3-a34d-4e58-ab86-e8d9d7235eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Checkers">
+      <UniqueIdentifier>{160b2695-64fc-4582-ac97-9d7e364ab42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Checkers\Factory">
+      <UniqueIdentifier>{4fcbb222-ab6e-44c5-b599-b0e59cdf7f44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ServiceMonitor_QtBoost.qrc">
@@ -101,7 +113,10 @@
       <Filter>Source Files\Services</Filter>
     </ClCompile>
     <ClCompile Include="TCPChecker.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Checkers</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckerFactory.cpp">
+      <Filter>Source Files\Checkers\Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +151,13 @@
       <Filter>Header Files\Services</Filter>
     </ClInclude>
     <ClInclude Include="TCPChecker.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Checkers</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckerFactory.h">
+      <Filter>Header Files\Checkers\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractChecker.h">
+      <Filter>Header Files\Checkers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
