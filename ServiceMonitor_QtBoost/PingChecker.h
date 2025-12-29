@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <QSharedPointer>
 
@@ -11,27 +11,29 @@
 #include <boost/array.hpp>
 
 #include "AbstractChecker.h"
-#include "TcpService.h"
+#include "PingService.h"
 #include "Logger.h"
+#include "icmp_header.hpp"
+#include "ipv4_header.hpp"
+
 
 namespace asio = boost::asio;
-using tcp = asio::ip::tcp;
 using icmp = asio::ip::icmp;
 
-class TCPChecker : public AbstractChecker
+class PingChecker : public AbstractChecker
 {
 	struct ServiceConnection
 	{
-		QSharedPointer<TcpService> service;
-		tcp::socket socket;
-		tcp::endpoint endpoint;
+		QSharedPointer<PingService> service;
+		icmp::socket socket;
+		icmp::endpoint endpoint;
 		std::chrono::steady_clock::time_point startTime;
 		std::chrono::steady_clock::time_point endTime;
 	};
 
 public:
-	TCPChecker();
-	~TCPChecker();
+	PingChecker();
+	~PingChecker();
 
 	virtual void start() override;
 	virtual void stop() override;
@@ -47,5 +49,16 @@ private:
 	std::atomic<bool> running{ false };
 	std::mutex servicesMutex;
 	QVector<QSharedPointer<ServiceConnection>> serviceConnections;
+
+	void handle_icmp_receive(
+		QSharedPointer<PingChecker::ServiceConnection> serviceConnection,
+		std::shared_ptr<boost::asio::streambuf> reply_buffer,
+		std::shared_ptr<boost::asio::steady_timer> timer,
+		uint16_t identifier,
+		uint16_t sequence,
+		const boost::system::error_code& ec,
+		std::size_t length);
+
+	void closeSocket(icmp::socket& socket);
 };
 

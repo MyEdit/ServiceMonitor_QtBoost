@@ -69,6 +69,9 @@
     <Filter Include="Header Files\Checkers\Factory">
       <UniqueIdentifier>{4fcbb222-ab6e-44c5-b599-b0e59cdf7f44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Checkers\PacketHeaders">
+      <UniqueIdentifier>{09d8d260-d0b8-4682-a871-b9d12936be44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ServiceMonitor_QtBoost.qrc">
@@ -118,6 +121,9 @@
     <ClCompile Include="CheckerFactory.cpp">
       <Filter>Source Files\Checkers\Factory</Filter>
     </ClCompile>
+    <ClCompile Include="PingChecker.cpp">
+      <Filter>Source Files\Checkers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IConfig.h">
@@ -158,6 +164,15 @@
     </ClInclude>
     <ClInclude Include="AbstractChecker.h">
       <Filter>Header Files\Checkers</Filter>
+    </ClInclude>
+    <ClInclude Include="PingChecker.h">
+      <Filter>Header Files\Checkers</Filter>
+    </ClInclude>
+    <ClInclude Include="icmp_header.hpp">
+      <Filter>Header Files\Checkers\PacketHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ipv4_header.hpp">
+      <Filter>Header Files\Checkers\PacketHeaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

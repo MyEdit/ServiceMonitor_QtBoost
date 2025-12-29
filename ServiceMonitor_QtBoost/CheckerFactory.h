@@ -17,7 +17,8 @@ public:
     static CheckerFactory* instance();
 
     void registerChecker(const QString& type, Creator creator);
-    QSharedPointer<AbstractChecker> create(const QString& type);
+    QSharedPointer<AbstractChecker> getOrCreate(const QString& type);
+    QVector<QSharedPointer<AbstractChecker>> getCheckers() const;
 
 private:
     QMap<QString, Creator> creators;

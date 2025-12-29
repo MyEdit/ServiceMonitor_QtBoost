@@ -12,7 +12,7 @@ void CheckerFactory::registerChecker(const QString& type, Creator creator)
     creators[type.trimmed().toLower()] = std::move(creator);
 }
 
-QSharedPointer<AbstractChecker> CheckerFactory::create(const QString& type)
+QSharedPointer<AbstractChecker> CheckerFactory::getOrCreate(const QString& type)
 {
     QString key = type.trimmed().toLower();
     if (instances.contains(key))
@@ -27,5 +27,10 @@ QSharedPointer<AbstractChecker> CheckerFactory::create(const QString& type)
 
     instances[key] = inst;
     return inst;
+}
+
+QVector<QSharedPointer<AbstractChecker>> CheckerFactory::getCheckers() const
+{
+    return instances.values();
 }
 

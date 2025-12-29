@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CheckerFactory.cpp" />
+    <ClCompile Include="PingChecker.cpp" />
     <ClCompile Include="PingService.cpp" />
     <ClCompile Include="TCPChecker.cpp" />
     <ClCompile Include="TcpService.cpp" />
@@ -137,8 +138,11 @@
     <ClInclude Include="AbstractChecker.h" />
     <ClInclude Include="CheckerFactory.h" />
     <ClInclude Include="HttpService.h" />
+    <ClInclude Include="icmp_header.hpp" />
     <ClInclude Include="IConfig.h" />
+    <ClInclude Include="ipv4_header.hpp" />
     <ClInclude Include="JsonConfig.h" />
+    <ClInclude Include="PingChecker.h" />
     <ClInclude Include="PingService.h" />
     <ClInclude Include="ServiceConfig.h" />
     <ClInclude Include="ServiceFactory.h" />

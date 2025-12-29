@@ -30,8 +30,6 @@ void TCPChecker::start()
                 Logger::instance()->error(QString("IO TCP поток выбросил ошибку: %1").arg(e.what()).toStdString());
             }
         });
-
-    // Можно запустить периодический цикл через asio::steady_timer, но для простоты - оставляем checkNow() вызываемым извне.
 }
 
 void TCPChecker::stop()
@@ -109,26 +107,26 @@ void TCPChecker::check()
 
             for (auto& serviceConnection : copyServiceConnections)
             {
-                auto start = std::chrono::steady_clock::now();
+                serviceConnection->startTime = std::chrono::steady_clock::now();
 
                 serviceConnection->socket.async_connect(serviceConnection->endpoint,
-                    [this, serviceConnection, start](const boost::system::error_code& ec)
+                    [this, serviceConnection](const boost::system::error_code& ec)
                     {
                         bool success = !ec;
                         qint64 latency = -1;
-                        if (success)
-                        {
-                            auto end = std::chrono::steady_clock::now();
-                            latency = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-                        }
+                        serviceConnection->endTime = std::chrono::steady_clock::now();
 
                         if (success)
                         {
-                            Logger::instance()->info(QString("TCPChecker: %1 connected").arg(serviceConnection->service->getName().toString()).toStdString());
+                            latency = std::chrono::duration_cast<std::chrono::milliseconds>(serviceConnection->endTime - serviceConnection->startTime).count();
+
+                            Logger::instance()->info(QString("TCPChecker: %1 connected, latency %2 ms")
+                                .arg(serviceConnection->service->getName().toString()).arg(QString::number(latency)).toStdString());
                         }
                         else
                         {
-                            Logger::instance()->info(QString("TCPChecker: %1 not connect (%2)").arg(serviceConnection->service->getName().toString(), QString::fromStdString(ec.message())).toStdString());
+                            Logger::instance()->info(QString("TCPChecker: %1 not connect (%2)")
+                                .arg(serviceConnection->service->getName().toString(), QString::fromStdString(ec.message())).toStdString());
                         }
 
                         if (serviceConnection->socket.is_open())

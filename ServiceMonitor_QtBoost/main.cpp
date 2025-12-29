@@ -7,6 +7,7 @@
 #include "CheckerFactory.h"
 
 #include "TCPChecker.h"
+#include "PingChecker.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,22 +29,30 @@ int main(int argc, char *argv[])
             return QSharedPointer<TCPChecker>::create();
         });
 
-    ServiceConfig* serviceConfig = new ServiceConfig(QDir(QCoreApplication::applicationDirPath()).filePath("Configs/Config.json"));
+    CheckerFactory::instance()->registerChecker("ping", []() -> QSharedPointer<AbstractChecker>
+        {
+            return QSharedPointer<PingChecker>::create();
+        });
 
+    ServiceConfig* serviceConfig = new ServiceConfig(QDir(QCoreApplication::applicationDirPath()).filePath("Configs/Config.json"));
     QVector<QSharedPointer<AbstractService>> servises = serviceConfig->getServises();
     for (auto& service : servises)
     {
         try
         {
-            QSharedPointer<AbstractChecker> checker = CheckerFactory::instance()->create(service->getServiceType().toString());
+            QSharedPointer<AbstractChecker> checker = CheckerFactory::instance()->getOrCreate(service->getServiceType().toString());
             checker->addService(service);
-            checker->start();
-            checker->check();
         }
         catch (const std::exception& e)
         {
-            
+            // EMPTY
         }
+    }
+
+    for (auto& checker : CheckerFactory::instance()->getCheckers())
+    {
+        checker->start();
+        checker->check();
     }
 
     ServiceMonitor_QtBoost window;
